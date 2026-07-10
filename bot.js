@@ -4,8 +4,10 @@ const localtunnel = require('localtunnel');
 const { initializeApp } = require('firebase/app');
 const { getDatabase, ref, onValue } = require('firebase/database');
 
-const firebaseConfig = { databaseURL: "https://SENIN_PROJEN.firebaseio.com/" };
-const db = getDatabase(initializeApp(firebaseConfig));
+// Secret içindeki JSON'ı okur
+const firebaseConfig = JSON.parse(process.env.FIREBASE_CONFIG);
+const app = initializeApp(firebaseConfig);
+const db = getDatabase(app);
 
 function startBot() {
     const bot = mineflayer.createBot({ 
