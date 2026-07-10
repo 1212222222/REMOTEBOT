@@ -7,6 +7,7 @@
     "mineflayer": "latest",
     "firebase": "latest",
     "prismarine-viewer": "latest",
-    "localtunnel": "latest"
+    "localtunnel": "latest",
+    "canvas": "latest" 
   }
 }
