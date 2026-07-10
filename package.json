@@ -2,12 +2,14 @@
   "name": "REMOTEBOT",
   "version": "1.0.0",
   "main": "bot.js",
-  "scripts": { "start": "node bot.js" },
+  "scripts": { 
+    "start": "node bot.js" 
+  },
   "dependencies": {
     "mineflayer": "latest",
     "firebase": "latest",
     "prismarine-viewer": "latest",
     "localtunnel": "latest",
-    "canvas": "latest" 
+    "canvas": "latest"
   }
 }
