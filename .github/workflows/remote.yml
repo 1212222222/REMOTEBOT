@@ -13,16 +13,23 @@ jobs:
       - uses: actions/setup-node@v4
         with: { node-version: '22' }
       
-      # 1. Sistem bağımlılıklarını kur
-      - name: Install System Dependencies
-        run: sudo apt-get update && sudo apt-get install -y build-essential libcairo2-dev libpango1.0-dev libjpeg-dev libgif-dev librsvg2-dev
+      # 1. Canvas'ın derlenmesi için gerekli TÜM sistem kütüphaneleri
+      - name: Install Dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y build-essential libcairo2-dev libpango1.0-dev libjpeg-dev libgif-dev librsvg2-dev pkg-config
       
-      # 2. Önce eski dosyaları temizle ve düzgün kurulum yap
-      - run: rm -rf node_modules package-lock.json
-      - run: npm install
-      
-      # 3. Canvas'ı zorunlu olarak derle ve kur
-      - run: npm install canvas --build-from-source
+      # 2. Temiz kurulum
+      - name: Install npm packages
+        run: |
+          rm -rf node_modules package-lock.json
+          npm install
+          
+      # 3. Canvas'ı zorla tekrar kur ve test et
+      - name: Force Canvas Install
+        run: |
+          npm install canvas --build-from-source
+          if [ -d "node_modules/canvas" ]; then echo "Canvas bulundu, her şey yolunda!"; else echo "Canvas YÜKLENEMEDİ!"; exit 1; fi
       
       # 4. Botu çalıştır
       - run: node bot.js
